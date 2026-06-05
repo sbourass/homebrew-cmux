@@ -1,6 +1,6 @@
 cask "cmux" do
-  version "0.64.11-sb.1"
-  sha256 "b955fcfb1219e4726a563d3b112aae385695c29f3a9c471bf61840d9ddd5bd13"
+  version "0.64.13-sb.1"
+  sha256 "d55a871328f40cda3fc30b0ae34356836b0719324af622f6a70597f2501d011c"
 
   url "https://github.com/sbourass/cmux/releases/download/v#{version}/cmux-macos.dmg"
   name "cmux (sbourass fork)"
@@ -26,11 +26,23 @@ cask "cmux" do
 
     Conflicts with the upstream `manaflow-ai/cmux` cask (same cask token);
     install only one at a time.
+
+    Uninstalling keeps your cmux preferences and session state (shared with
+    the upstream cmux app). `brew uninstall --zap` additionally clears this
+    fork's per-pane shell history and regenerated caches. To remove
+    everything cmux stores -- including preferences, which may contain
+    sensitive data -- also run:
+
+      rm -rf "$HOME/Library/Application Support/cmux" "$HOME/Library/Caches/cmux" "$HOME/Library/Preferences/com.cmuxterm.app.plist"
   EOS
 
   zap trash: [
-    "~/Library/Application Support/cmux",
+    # Both entries are intentional. The SHARED live state -- the main
+    # "~/Library/Application Support/cmux" dir and the "com.cmuxterm.app"
+    # prefs (same bundle id as upstream) -- is deliberately NOT listed, so a
+    # revert to upstream keeps session state and settings. panel-history is
+    # fork-specific (would otherwise orphan under upstream); Caches regenerate.
+    "~/Library/Application Support/cmux/panel-history",
     "~/Library/Caches/cmux",
-    "~/Library/Preferences/ai.manaflow.cmuxterm.plist",
   ]
 end
