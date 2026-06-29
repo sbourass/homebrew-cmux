@@ -1,4 +1,4 @@
-cask "cmux" do
+cask "cmux-sb" do
   version "0.64.17-sb.1"
   sha256 "b30215c653581f76b71da46259b8165a0cacd602de4375dd41c387b76699f73c"
 
@@ -12,7 +12,7 @@ cask "cmux" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "cmux.app"
   binary "#{appdir}/cmux.app/Contents/Resources/bin/cmux"
@@ -24,8 +24,8 @@ cask "cmux" do
 
       xattr -dr com.apple.quarantine /Applications/cmux.app
 
-    Conflicts with the upstream `manaflow-ai/cmux` cask (same cask token);
-    install only one at a time.
+    Conflicts with the upstream `cmux` cask (both install cmux.app and share
+    the com.cmuxterm.app bundle id); install only one at a time.
 
     Uninstalling keeps your cmux preferences and session state (shared with
     the upstream cmux app). `brew uninstall --zap` additionally clears this
