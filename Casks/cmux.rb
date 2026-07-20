@@ -1,6 +1,6 @@
 cask "cmux" do
-  version "0.64.18-sb.1"
-  sha256 "726d9de39df7feb1f43bc2653794c2e81d2562e5345245513ff51cf0347e73bb"
+  version "0.64.19-sb.1"
+  sha256 "f01a84b4d7485112085a708b28f84cfb119ee44fa84dfd10d6439a7d5506b586"
 
   url "https://github.com/sbourass/cmux/releases/download/v#{version}/cmux-macos.dmg"
   name "cmux (sbourass fork)"
